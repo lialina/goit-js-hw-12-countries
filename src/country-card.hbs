@@ -1,0 +1,9 @@
+<li class="country-card">
+    <h2>{{this.name}}</h2>
+    <p>Capital:{{this.capital}}</p>
+    <ul class="languages-list">
+        {{#each this.languages}}
+        <li class="language">{{this}}</li>
+        {{/each}}
+    </ul>
+</li>
