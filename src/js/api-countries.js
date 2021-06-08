@@ -1,5 +1,3 @@
-// import fetchCountries from './js/fetchCountries.js';
-
 export default class CountriesApiService {
     constructor() {
         this.searchQuery = '';
@@ -8,8 +6,10 @@ export default class CountriesApiService {
     fetchCountries() {
         const url = `https://restcountries.eu/rest/v2/name/${this.searchQuery}`;
         
-        return fetch(url).then(r => r.json()).then(data => {
-            return data
+        return fetch(url)
+            .then(r => r.json())
+            .then(data => {
+                return data;
         });
     }
 
@@ -19,9 +19,5 @@ export default class CountriesApiService {
 
     set query(newQuery) {
         this.searchQuery = newQuery;
-    }
-
-    
+    }  
 };
-
-// data.length >= 2 && data.length <= 10;
