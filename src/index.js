@@ -54,12 +54,11 @@ function appendMarkup(data) {
   if (data.length > 10) {
     specifyAlert();
   }
-}
+};
 
 function clearCountriesContainer() {
   refs.countriesContainer.innerHTML = '';
-}
-
+};
 
 const barElement = document.querySelector('.bar');
 const sphereElement = document.querySelector('.sphere');
@@ -72,7 +71,7 @@ function showLoader() {
 function removeLoader() {
   barElement.classList.add('is-hidden');
   sphereElement.classList.add('is-hidden');
-}
+};
 
 function specifyAlert() {
   info({
@@ -95,5 +94,5 @@ function specifyAlert() {
         }
       ]
     ])
-  });
-}
+  })
+};
