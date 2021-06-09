@@ -7,6 +7,10 @@
 @import './example';
 @import './loader';
 
+body {
+  background-color: rgb(248, 238, 226);
+}
+
 .container {
   text-align: center;
   margin-top: 2rem;
