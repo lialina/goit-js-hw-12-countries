@@ -10,8 +10,8 @@ export default class CountriesApiService {
             .then(r => r.json())
             .then(data => {
                 return data;
-        });
-    }
+            });
+        }
 
     get query() {
         return this.searchQuery;

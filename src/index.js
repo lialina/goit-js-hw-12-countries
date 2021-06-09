@@ -12,9 +12,9 @@ import "@pnotify/confirm/dist/PNotifyConfirm.css";
 const debounce = require('lodash.debounce');
 
 const refs = {
-    countryInput: document.querySelector('#country-input'),
-    searchResultsList: document.querySelector('.js-countries'),
-    countriesContainer: document.querySelector('.js-countries'),
+  countryInput: document.querySelector('#country-input'),
+  searchResultsList: document.querySelector('.js-countries'),
+  countriesContainer: document.querySelector('.js-countries'),
 };
 
 const newsApiService = new CountriesApiService();
@@ -23,21 +23,23 @@ refs.countryInput.addEventListener('input', debounce(onSearch, 500));
 
 function onSearch(e) {
   e.preventDefault();
-  newsApiService.query = e.currentTarget.value.trim();
+  newsApiService.query = e.target.value.trim();
 
   showLoader();
-  
+
   newsApiService.fetchCountries().then(data => {
     appendMarkup(data);
     removeLoader();
-  });
+  })
+  .catch(removeLoader());
 };
 
 function appendMarkup(data) {
   clearCountriesContainer();
-  
+
   if (refs.countryInput.value.length === 0) {
     clearCountriesContainer();
+    removeLoader();
     return;
   }
 
@@ -63,13 +65,13 @@ const barElement = document.querySelector('.bar');
 const sphereElement = document.querySelector('.sphere');
 
 function showLoader() {
-  barElement.classList.remove('.is-hidden');
-  sphereElement.classList.remove('.is-hidden');
+  barElement.classList.remove('is-hidden');
+  sphereElement.classList.remove('is-hidden');
 };
 
 function removeLoader() {
-  barElement.classList.add('.is-hidden');
-  sphereElement.classList.add('.is-hidden');
+  barElement.classList.add('is-hidden');
+  sphereElement.classList.add('is-hidden');
 }
 
 function specifyAlert() {
