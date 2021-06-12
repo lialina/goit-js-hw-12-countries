@@ -17,21 +17,13 @@ const refs = {
   countriesContainer: document.querySelector('.js-countries'),
 };
 
-const newsApiService = new CountriesApiService();
-
 refs.countryInput.addEventListener('input', debounce(onSearch, 500));
 
 function onSearch(e) {
   e.preventDefault();
   newsApiService.query = e.target.value.trim();
 
-  showLoader();
-
-  newsApiService.fetchCountries().then(data => {
-    appendMarkup(data);
-    removeLoader();
-  })
-  .catch(removeLoader());
+  newsApiService.fetchCountries().then();
 };
 
 function appendMarkup(data) {
@@ -39,7 +31,6 @@ function appendMarkup(data) {
 
   if (refs.countryInput.value.length === 0) {
     clearCountriesContainer();
-    removeLoader();
     return;
   }
 
@@ -60,18 +51,19 @@ function clearCountriesContainer() {
   refs.countriesContainer.innerHTML = '';
 };
 
-const barElement = document.querySelector('.bar');
-const sphereElement = document.querySelector('.sphere');
+const newsApiService = new CountriesApiService({
+  barSelector: ".bar",
+  onResolved: appendMarkup,
+  onRejected: onError,
+});
 
-function showLoader() {
-  barElement.classList.remove('is-hidden');
-  sphereElement.classList.remove('is-hidden');
-};
-
-function removeLoader() {
-  barElement.classList.add('is-hidden');
-  sphereElement.classList.add('is-hidden');
-};
+function onError(err) {
+  refs.countriesContainer.innerHTML = "";
+  const error = document.createElement("h1");
+  error.textContent = "Sorry, we couldn't pull up requested data :(";
+  refs.countriesContainer.appendChild(error);
+  console.warn(err);
+}
 
 function specifyAlert() {
   info({
