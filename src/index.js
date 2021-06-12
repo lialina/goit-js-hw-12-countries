@@ -23,7 +23,7 @@ function onSearch(e) {
   e.preventDefault();
   newsApiService.query = e.target.value.trim();
 
-  newsApiService.fetchCountries().then();
+  newsApiService.fetchCountries();
 };
 
 function appendMarkup(data) {
